@@ -37,9 +37,4 @@ public class MapManager : MonoBehaviour
 
         mapSpawner = GetComponent<MapSpawner>();
     }
-
-    void Start()
-    {
-        mapSpawner.StartGame();
-    }
 }

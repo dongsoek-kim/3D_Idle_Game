@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.RestService;
 using UnityEngine;
 
 public class PlayerBase: MonoBehaviour
@@ -22,8 +23,8 @@ public class PlayerBase: MonoBehaviour
 
         healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
         healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
+        healthBarInstance.transform.rotation = transform.rotation;
         healthBarInstance.transform.SetParent(worldCanvas.transform);
-        //skillText.text = monsterData.skillName;
     }
     private void Update()
     {
@@ -35,6 +36,12 @@ public class PlayerBase: MonoBehaviour
     {
         float healthPercentage = currentHealth / characterData.maxHealth;
         healthBarInstance.GetComponentInChildren<UnityEngine.UI.Image>().fillAmount = healthPercentage;
+    }
+
+    public void GetTarget(MonsterBase monster)
+    {
+        target = monster;
+        Debug.Log($"{characterData.name}target:  + {target.monsterData.monsterName}");
     }
     public virtual void Attack()
     {

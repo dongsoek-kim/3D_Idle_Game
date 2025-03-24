@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MapSpawner : MonoBehaviour
 {
@@ -40,8 +41,8 @@ public class MapSpawner : MonoBehaviour
         else
         {
             map = mapPrefabs[GetRandomNumber()];
-            spawnPoint.position = preMap.end.position;
-            spawnPoint.rotation = preMap.end.rotation;
+            spawnPoint.position = preMap.endPoint.position;
+            spawnPoint.rotation = preMap.endPoint.rotation;
 
         }
         Map newMap = Instantiate(map, spawnPoint.position, spawnPoint.rotation);
@@ -50,10 +51,14 @@ public class MapSpawner : MonoBehaviour
         if (mapSpawnQueue.Count > 3)
         {
             Map mapToDestroy = mapSpawnQueue.Dequeue();
-            Destroy(mapToDestroy.gameObject);
+            StartCoroutine(DestroyObjectAfterDelay(mapToDestroy,5f));           
         }
     }
-
+    private IEnumerator DestroyObjectAfterDelay(Map mapToDestroy, float delay)
+    {
+        yield return new WaitForSeconds(delay); 
+        Destroy(mapToDestroy.gameObject);
+    }
     public int GetRandomNumber()
     {
         return random.Next(0, 4);

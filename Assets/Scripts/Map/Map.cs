@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public Transform end;
-    public Transform party;
-    public Transform monsterSpawn;
+    public Transform endPoint;
+    public Transform partyPoint;
+    public Transform monsterSpawnPoint;
     public MonsterBase monster;
 
     private void Start()
     {
-        if (monsterSpawn != null)
+        if (monsterSpawnPoint != null)
         {
             Debug.Log("Monster Spawned");
-            monster = MonsterManager.Instance.SpawnMonster(monsterSpawn);
+            monster = MonsterManager.Instance.SpawnMonster(monsterSpawnPoint);
             if (monster != null)
             {
                 monster.transform.SetParent(this.transform);

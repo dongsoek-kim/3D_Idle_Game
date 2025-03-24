@@ -189,6 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5191273673427398057}
+  - component: {fileID: 8520387986783744445}
   m_Layer: 0
   m_Name: EndPoint
   m_TagString: Untagged
@@ -211,6 +212,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1664219891272418561}
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+--- !u!114 &8520387986783744445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6139373154069011199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0, z: -2.5}
+  m_EndPoint: {x: 0, y: 0, z: 2.5}
+  m_Width: 0
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1 &7775125532413887767
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1664219891272418561}
   - component: {fileID: -1952877782941691753}
+  - component: {fileID: 7423010951874852982}
   m_Layer: 0
   m_Name: Round_LeftCurve
   m_TagString: Untagged
@@ -290,9 +312,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c62a2e0765e9846a91e9bd0e79f2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  end: {fileID: 5191273673427398057}
-  party: {fileID: 2240303104530481514}
-  monsterSpawn: {fileID: 4222804548669205113}
+  endPoint: {fileID: 5191273673427398057}
+  partyPoint: {fileID: 2240303104530481514}
+  monsterSpawnPoint: {fileID: 4222804548669205113}
+  monster: {fileID: 0}
+--- !u!114 &7423010951874852982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603741452198536852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: ab0388384d1012d41a532258c3603cd6, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &8678549440768696124
 GameObject:
   m_ObjectHideFlags: 0

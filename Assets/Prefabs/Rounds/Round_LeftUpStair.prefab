@@ -192,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3070741643145639639}
   - component: {fileID: -2145934307327154259}
+  - component: {fileID: 3187876058278132173}
   m_Layer: 0
   m_Name: Round_LeftUpStair
   m_TagString: Untagged
@@ -230,9 +231,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c62a2e0765e9846a91e9bd0e79f2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  end: {fileID: 1844353865749760702}
-  party: {fileID: 2643579694520733793}
-  monsterSpawn: {fileID: 6981746029785135732}
+  endPoint: {fileID: 1844353865749760702}
+  partyPoint: {fileID: 2643579694520733793}
+  monsterSpawnPoint: {fileID: 6981746029785135732}
+  monster: {fileID: 0}
+--- !u!114 &3187876058278132173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6054817715158916447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 80b660484582575479cf27236ad8175f, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &6356429266134503613
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1844353865749760702}
+  - component: {fileID: 4859353633283579223}
   m_Layer: 0
   m_Name: EndPoind
   m_TagString: Untagged
@@ -396,6 +430,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3070741643145639639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4859353633283579223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8641935200506449263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0, z: -2.5}
+  m_EndPoint: {x: 0, y: 0, z: 2.5}
+  m_Width: 0
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1001 &37585070789043961
 PrefabInstance:
   m_ObjectHideFlags: 0
