@@ -25,7 +25,38 @@ Transform:
   m_GameObject: {fileID: 759635569362894995}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5307846, y: -10.49254, z: 23.305471}
+  m_LocalPosition: {x: -1, y: 0, z: 20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3070741643145639639}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1240639378783842316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2643579694520733793}
+  m_Layer: 0
+  m_Name: PartyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2643579694520733793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240639378783842316}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1, y: 0, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -183,6 +214,7 @@ Transform:
   m_Children:
   - {fileID: 1844353865749760702}
   - {fileID: 6981746029785135732}
+  - {fileID: 2643579694520733793}
   - {fileID: 5376373857393083307}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -198,10 +230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c62a2e0765e9846a91e9bd0e79f2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 0}
   end: {fileID: 1844353865749760702}
-  party: {fileID: 0}
-  monsterSpawn: {fileID: 0}
+  party: {fileID: 2643579694520733793}
+  monsterSpawn: {fileID: 6981746029785135732}
 --- !u!1 &6356429266134503613
 GameObject:
   m_ObjectHideFlags: 0
