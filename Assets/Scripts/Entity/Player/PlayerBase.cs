@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class PlayerBase: MonoBehaviour
 {
-    float aggro;
-    float maxHealth;
-    float currentHealth;
-    float attackSpeed;
-    int damage;
+    public CharacterData characterData;
+
+    public GameObject healthBarPrefab;
+    private GameObject healthBarInstance;
+    public float currentHealth;
+
+    private Canvas worldCanvas;
 
     MonsterBase target;
+
+    public virtual void Start()
+    {
+        currentHealth = characterData.maxHealth;
+
+        worldCanvas = FindObjectOfType<Canvas>();
+
+        healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
+        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
+        healthBarInstance.transform.SetParent(worldCanvas.transform);
+        //skillText.text = monsterData.skillName;
+    }
     public virtual void Attack()
     {
         Debug.Log("Player Attack");
@@ -28,11 +42,4 @@ public class PlayerBase: MonoBehaviour
         Debug.Log("Using skill");
     }
 
-    public void Init(float _maxHealth, float _attackSpeed, int _damage)
-    {
-        maxHealth = _maxHealth;
-        currentHealth = maxHealth;
-        attackSpeed = _attackSpeed;
-        damage = _damage;
-    }
 }

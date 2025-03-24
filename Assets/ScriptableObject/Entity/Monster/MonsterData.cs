@@ -9,8 +9,8 @@ public class MonsterData : ScriptableObject
     public GameObject prefab;
     [Header("MonsterData Stats")]
     public string monsterName; 
-    public int health;         
-    public int damage;         
+    public float maxHealth;         
+    public float damage;         
     public float attackSpeed;
     public string skillName;
 }

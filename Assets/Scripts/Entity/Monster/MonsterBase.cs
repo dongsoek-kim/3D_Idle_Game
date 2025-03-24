@@ -14,7 +14,7 @@ public class MonsterBase : MonoBehaviour
     private Canvas worldCanvas;
     public virtual void Start()
     { 
-        currentHealth = monsterData.health;
+        currentHealth = monsterData.maxHealth;
 
         worldCanvas = FindObjectOfType<Canvas>();
 
@@ -64,7 +64,7 @@ public class MonsterBase : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        float healthPercentage = currentHealth / monsterData.health;
+        float healthPercentage = currentHealth / monsterData.maxHealth;
         healthBarInstance.GetComponentInChildren<UnityEngine.UI.Image>().fillAmount = healthPercentage;
     }
 }

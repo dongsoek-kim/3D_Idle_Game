@@ -38,8 +38,7 @@ public class MonsterManager : MonoBehaviour
     public MonsterBase SpawnMonster(Transform monsterSpawn)
     {
         int randomIndex = Random.Range(0, monsters.Count);
-        GameObject monsterObject = Instantiate(monsters[randomIndex].monsterData.prefab, transform.position, Quaternion.identity);
-        MonsterBase newMonster = monsterObject.GetComponent<MonsterBase>();
+        MonsterBase newMonster = Instantiate(monsters[randomIndex], monsterSpawn.position, monsterSpawn.rotation);
         return newMonster;
     }
 }

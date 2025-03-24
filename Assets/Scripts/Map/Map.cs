@@ -14,8 +14,12 @@ public class Map : MonoBehaviour
     {
         if (monsterSpawn != null)
         {
-           Debug.Log("Monster Spawned");
+            Debug.Log("Monster Spawned");
             monster = MonsterManager.Instance.SpawnMonster(monsterSpawn);
+            if (monster != null)
+            {
+                monster.transform.SetParent(this.transform);
+            }
         }
     }
 }

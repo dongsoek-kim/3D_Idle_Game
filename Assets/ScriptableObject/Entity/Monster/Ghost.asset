@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac6cc3bf8ddf93408eb1d8e061d2acf, type: 3}
   m_Name: Ghost
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1000011148102054, guid: 47228d4b7bdfaa94fbf70257eaa459a1, type: 3}
+  prefab: {fileID: 3691348628324269932, guid: cc513ec3495378b4f91201f50647894f, type: 3}
   monsterName: Ghost
-  health: 30
+  maxHealth: 0
   damage: 5
   attackSpeed: 1
   skillName: "\uC808\uB9DD"
