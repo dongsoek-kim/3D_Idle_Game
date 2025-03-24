@@ -7,10 +7,13 @@ public class MonsterBase : MonoBehaviour
 {
     public GameObject healthBarPrefab;     
     private GameObject healthBarInstance;
+    public float currentHealth;
+
     public MonsterData monsterData;
     public TextMeshPro skillText;
-    public float currentHealth;
+
     public int targetSlot;
+
     private Canvas worldCanvas;
     public virtual void Start()
     { 
@@ -19,7 +22,8 @@ public class MonsterBase : MonoBehaviour
         worldCanvas = FindObjectOfType<Canvas>();
 
         healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform); 
-        healthBarInstance.transform.position = transform.position + Vector3.up * 4f; 
+        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
+        healthBarInstance.transform.rotation = transform.rotation;
         healthBarInstance.transform.SetParent(worldCanvas.transform);
         //skillText.text = monsterData.skillName;
     }

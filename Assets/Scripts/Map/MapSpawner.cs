@@ -13,7 +13,7 @@ public class MapSpawner : MonoBehaviour
 
     public Queue<Map> mapSpawnQueue = new Queue<Map>();
 
-    private System.Random random;
+    private System.Random random=new System.Random();
 
     private void Start()
     {

@@ -268,7 +268,7 @@ Animator:
   m_GameObject: {fileID: 3691348628324269932}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fd4b310424927a840906404a14eeb5e4, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5b82fdf8de6ef845acab615deb8a900, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -293,9 +293,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarPrefab: {fileID: 3715729364789494505, guid: fddb3a59dd63c6a42b7d45c847dcd87a,
     type: 3}
+  currentHealth: 0
   monsterData: {fileID: 11400000, guid: 17e6d798b9a25df4fa45871363206a5f, type: 2}
   skillText: {fileID: 0}
-  currentHealth: 0
   targetSlot: 0
 --- !u!1 &5599594304742488523
 GameObject:

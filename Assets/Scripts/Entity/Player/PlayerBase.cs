@@ -25,6 +25,17 @@ public class PlayerBase: MonoBehaviour
         healthBarInstance.transform.SetParent(worldCanvas.transform);
         //skillText.text = monsterData.skillName;
     }
+    private void Update()
+    {
+        UpdateHealthBar();
+        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
+    }
+
+    public void UpdateHealthBar()
+    {
+        float healthPercentage = currentHealth / characterData.maxHealth;
+        healthBarInstance.GetComponentInChildren<UnityEngine.UI.Image>().fillAmount = healthPercentage;
+    }
     public virtual void Attack()
     {
         Debug.Log("Player Attack");
