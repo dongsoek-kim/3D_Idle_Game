@@ -41,7 +41,7 @@ public class DungeonController : MonoBehaviour
     void Start()
     {
         mapManager.mapSpawner.StartGame();
-        mapManager.mapSpawner.MapSpawn();
+        mapManager.mapSpawner.DequeueMap();
         party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
     }
 
@@ -56,6 +56,7 @@ public class DungeonController : MonoBehaviour
         monster.onDeath += MonsterDie;
         party.GetTarget(monster);
         monster.Gettarget(party.partyMembers);
+        mapManager.mapSpawner.MapSpawn();
     }
 
     public void MonsterDie()
@@ -64,7 +65,7 @@ public class DungeonController : MonoBehaviour
         {
             Debug.Log("Monster Die");
             party.GetTarget(null);
-            mapManager.mapSpawner.MapSpawn();
+            //mapManager.mapSpawner.MapSpawn();
             Debug.Log(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint.position);
             party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
         }

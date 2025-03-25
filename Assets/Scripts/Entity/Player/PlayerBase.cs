@@ -18,6 +18,7 @@ public class PlayerBase: MonoBehaviour
     public Animator animator;
     public float atttackdelay;
     MonsterBase? target;
+
     public virtual void Start()
     {
         currentHealth = characterData.maxHealth;
@@ -27,8 +28,6 @@ public class PlayerBase: MonoBehaviour
         healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
         Image[] images = healthBarInstance.GetComponentsInChildren<Image>();
         healthBarImage = images.FirstOrDefault(img => img.gameObject != healthBarInstance);
-        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
-        healthBarInstance.transform.rotation = transform.rotation;
         healthBarInstance.transform.SetParent(worldCanvas.transform);
 
         atttackdelay = characterData.attackSpeed;
@@ -36,7 +35,6 @@ public class PlayerBase: MonoBehaviour
     private void Update()
     {
         UpdateHealthBar();
-        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
         if (target != null)
         {
             if (atttackdelay > Time.deltaTime)
@@ -53,6 +51,8 @@ public class PlayerBase: MonoBehaviour
 
     public void UpdateHealthBar()
     {
+        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
+        healthBarInstance.transform.rotation = transform.rotation;
         float healthPercentage = currentHealth / characterData.maxHealth;
         healthBarImage.fillAmount = healthPercentage;
     }

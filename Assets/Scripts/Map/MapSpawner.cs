@@ -13,6 +13,7 @@ public class MapSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
 
     public Queue<Map> mapSpawnQueue = new Queue<Map>();
+    public Queue<Map> destroyQueue = new Queue<Map>();
 
     private System.Random random=new System.Random();
 
@@ -50,16 +51,29 @@ public class MapSpawner : MonoBehaviour
         mapSpawnQueue.Enqueue(newMap);
         if (mapSpawnQueue.Count > 3)
         {
-            Map mapToDestroy = mapSpawnQueue.Dequeue();
-            StartCoroutine(DestroyAfterDelay(mapToDestroy, 5f));
+            DequeueMap();
         }
-
     }
-    public IEnumerator DestroyAfterDelay(Map mapToDestroy,float delay)
+
+    public void DequeueMap()
     {
-        yield return new WaitForSeconds(delay);
+        Map mapToDestroy = mapSpawnQueue.Dequeue();
+        destroyQueue.Enqueue(mapToDestroy);
+        if(mapSpawnQueue.Count<3)
+        {
+            MapSpawn();
+        }
+    }
+    public void DestroyMap()
+    {
+        Map mapToDestroy = destroyQueue.Dequeue();
         Destroy(mapToDestroy.gameObject);
     }
+    //public IEnumerator DestroyAfterDelay(Map mapToDestroy,float delay)
+    //{
+    //    yield return new WaitForSeconds(delay);
+    //    Destroy(mapToDestroy.gameObject);
+    //}
     public int GetRandomNumber()
     {
         return random.Next(0, 4);

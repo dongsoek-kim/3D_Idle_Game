@@ -42,6 +42,7 @@ public class Party : MonoBehaviour
                 agent.isStopped = true;
                 isMoving = false;
                 DungeonController.Instance.Fight();
+                MapManager.Instance.mapSpawner.DestroyMap();
                 foreach (PlayerBase member in partyMembers)
                 {
                     if (member != null)
