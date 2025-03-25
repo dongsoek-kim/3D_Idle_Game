@@ -26,7 +26,6 @@ public class MapSpawner : MonoBehaviour
     {
         MapSpawn();
         MapSpawn();
-        MapSpawn();
     }
 
     public void MapSpawn()
@@ -49,7 +48,7 @@ public class MapSpawner : MonoBehaviour
         Map newMap = Instantiate(map, spawnPoint.position, spawnPoint.rotation);
         preMap = newMap;
         mapSpawnQueue.Enqueue(newMap);
-        if (mapSpawnQueue.Count > 3)
+        if (mapSpawnQueue.Count > 2)
         {
             DequeueMap();
         }
@@ -59,7 +58,7 @@ public class MapSpawner : MonoBehaviour
     {
         Map mapToDestroy = mapSpawnQueue.Dequeue();
         destroyQueue.Enqueue(mapToDestroy);
-        if(mapSpawnQueue.Count<3)
+        if(mapSpawnQueue.Count<2)
         {
             MapSpawn();
         }

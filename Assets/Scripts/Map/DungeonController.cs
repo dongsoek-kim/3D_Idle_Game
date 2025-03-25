@@ -8,6 +8,7 @@ public class DungeonController : MonoBehaviour
     public Party party;
     public MonsterBase monster;
     public MapManager mapManager;
+    public CoinPool coinpool;
     private static DungeonController instance;
     public static DungeonController Instance
     {
@@ -63,7 +64,8 @@ public class DungeonController : MonoBehaviour
         try
         {
             Debug.Log("Monster Die");
-            party.GetTarget(null);   
+            party.GetTarget(null);
+            coinpool.OnMonsterDeath(monster.transform);
             //mapManager.mapSpawner.MapSpawn();
             Debug.Log(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint.position);
             party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
