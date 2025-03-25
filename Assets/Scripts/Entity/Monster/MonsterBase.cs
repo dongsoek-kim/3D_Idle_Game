@@ -15,7 +15,7 @@ public class MonsterBase : MonoBehaviour
     public MonsterData monsterData;
     public TextMeshPro skillText;
     public PlayerBase target;
-    private Canvas worldCanvas;
+    public Canvas worldCanvas;
     public float atttackdelay;
     public Animator animator;
 
@@ -23,7 +23,7 @@ public class MonsterBase : MonoBehaviour
     public void Start()
     { 
         currentHealth = monsterData.maxHealth;
-        worldCanvas = FindObjectOfType<Canvas>();
+        FindWorldCanvas();
         healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
         Image[] images = healthBarInstance.GetComponentsInChildren<Image>();
         healthBarImage = images.FirstOrDefault(img => img.gameObject != healthBarInstance);
@@ -109,4 +109,20 @@ public class MonsterBase : MonoBehaviour
         target = partyMembers[highestAggro];
         Debug.Log($"{monsterData.monsterName} target: {target.characterData.name}");
     }
+
+    public void FindWorldCanvas()
+    {
+        Canvas[] allCanvases = FindObjectsOfType<Canvas>();  // 씬에 있는 모든 Canvas를 가져옵니다.
+
+        foreach (Canvas canvas in allCanvases)
+        {
+            // WorldSpace 모드인 Canvas를 찾습니다.
+            if (canvas.renderMode == RenderMode.WorldSpace)
+            {
+                worldCanvas = canvas;  // WorldSpace Canvas를 설정
+                break;  // WorldSpace Canvas가 발견되면 루프 종료
+            }
+        }
+    }
+
 }

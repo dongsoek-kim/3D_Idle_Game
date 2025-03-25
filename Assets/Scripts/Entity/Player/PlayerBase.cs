@@ -22,7 +22,7 @@ public class PlayerBase: MonoBehaviour
     public virtual void Start()
     {
         currentHealth = characterData.maxHealth;
-        worldCanvas = FindObjectOfType<Canvas>();
+        FindWorldCanvas();
         animator = GetComponent<Animator>();
 
         healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
@@ -84,5 +84,19 @@ public class PlayerBase: MonoBehaviour
     public virtual void UseSkill()
     {
         Debug.Log("Using skill");
+    }
+
+    public void FindWorldCanvas()
+    {
+        Canvas[] allCanvases = FindObjectsOfType<Canvas>();  
+
+        foreach (Canvas canvas in allCanvases)
+        {
+            if (canvas.renderMode == RenderMode.WorldSpace)
+            {
+                worldCanvas = canvas;  
+                break;  
+            }
+        }
     }
 }
