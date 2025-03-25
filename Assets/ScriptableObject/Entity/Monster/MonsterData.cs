@@ -13,7 +13,6 @@ public class MonsterData : ScriptableObject
     public float maxHealth;         
     public float damage;         
     public float attackSpeed;
-    public string skillName;
     public int basecoin;
 
 }

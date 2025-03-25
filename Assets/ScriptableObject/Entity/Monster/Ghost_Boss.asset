@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dac6cc3bf8ddf93408eb1d8e061d2acf, type: 3}
-  m_Name: Ghost
+  m_Name: Ghost_Boss
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3691348628324269932, guid: cc513ec3495378b4f91201f50647894f, type: 3}
-  monsterName: Ghost
-  maxHealth: 50
-  damage: 10
-  attackSpeed: 3
-  basecoin: 50
+  prefab: {fileID: 1000011296433714, guid: 30d420b7cf5d3ad40b5c02db6d73287a, type: 3}
+  monsterName: Ghost_Boss
+  maxHealth: 10000
+  damage: 200
+  attackSpeed: 2
+  basecoin: 1000

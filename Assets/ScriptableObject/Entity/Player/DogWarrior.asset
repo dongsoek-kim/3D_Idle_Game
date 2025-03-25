@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: "\uC9C4\uB3CC\uC774"
   aggro: 150
-  maxHealth: 150
+  baseHealth: 150
   attackSpeed: 1
-  damage: 50
+  baseAttackPower: 20

@@ -9,7 +9,7 @@ public class CharacterData : ScriptableObject
     [Header("CharacterData Stats")]
     public string CharacterName;
     public float aggro;
-    public float maxHealth;
+    public float baseHealth;
     public float attackSpeed;
-    public float damage;
+    public float baseAttackPower;
 }

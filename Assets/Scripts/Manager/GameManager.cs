@@ -8,8 +8,17 @@ public class GameManager : MonoBehaviour
     [Header("player")]
     public int attckPowerStack;
     public int HealthStack;
-    private BigInteger coin; 
+    public int attckUpgradePriceBase;
+    public int HealthUpgradePriceBase;
+    private BigInteger coin;
 
+
+    BigInteger attckUpgradePrice;
+    BigInteger HealthUpgradePrice;
+    BigInteger prevAttck = 0;
+    BigInteger currAttck = 1;
+    BigInteger prevHealth = 0;
+    BigInteger currHealth = 1;
 
     [Header("Dungeonscene")]
     public DungeonController dungeonController;
@@ -17,19 +26,16 @@ public class GameManager : MonoBehaviour
 
     public int Stage { get; set; }
 
-
     private static GameManager instance;
     public GameManager gameManager;
     public static GameManager Instance
     {
         get
         {
-            // 인스턴스가 없다면 새로 생성
             if (instance == null)
             {
                 GameObject gameManagerObj = new GameObject("GameManager");
                 instance = gameManagerObj.AddComponent<GameManager>();
-                DontDestroyOnLoad(gameManagerObj);
             }
             return instance;
         }
@@ -43,6 +49,7 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         gameManager = GetComponent<GameManager>();
@@ -56,8 +63,14 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+    public void Start()
+    {
+        attckUpgradePriceBase = 10;
+        HealthUpgradePriceBase = 10;
+        attckUpgradePrice = 10;
+        HealthUpgradePrice= 10;
 
-
+    }
     public BigInteger Coin
     {
         get => coin;
@@ -70,13 +83,65 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("돈썻디");
                 ingameUI.UPdateCoin(coin);
             }
         }
     }
     public void UsedCoin(BigInteger bigInteger)
     {
-        coin -= bigInteger;
+        Coin -= bigInteger;
+    }
+
+    public void OnAttackPowerPlus()
+    {
+        if (coin >= attckUpgradePrice)
+        {
+            UsedCoin(attckUpgradePrice);
+            attckPowerStack += 1;
+            BigInteger next = prevAttck + currAttck;
+            prevAttck = currAttck;
+            currAttck = next;
+            attckUpgradePrice = currAttck * (BigInteger)attckUpgradePriceBase * attckPowerStack;
+            ingameUI.UpGradeAttak(currAttck, attckUpgradePrice);
+            foreach (Player mamber in DungeonController.Instance.party.partyMembers)
+            {
+                if (mamber != null)
+                {
+                    mamber.UpgradeAttackPower(currAttck);
+                }
+            }
+        }
+        else
+        {
+            Debug.Log($"{attckUpgradePrice}필요");
+            Debug.Log(AlphabetNumberFormatter.FormatNumber(Coin));
+        }
+    }
+    public void OnHealthPlus()
+    {
+        if (coin >= HealthUpgradePrice)
+        {
+            UsedCoin(HealthUpgradePrice);
+            HealthStack += 1;
+            BigInteger next = prevHealth + currHealth;
+            prevHealth = currHealth;
+            currHealth = next;
+            HealthUpgradePrice = currHealth * (BigInteger)HealthUpgradePriceBase * HealthStack;
+            ingameUI.UpGradeHealth(currHealth, HealthUpgradePrice);
+            foreach (Player mamber in DungeonController.Instance.party.partyMembers)
+            {
+                if (mamber != null)
+                {
+                    mamber.UpgradeHealth(currHealth);
+                }
+            }
+        }
+        else
+        {
+            Debug.Log($"{HealthUpgradePrice}필요");
+            Debug.Log(AlphabetNumberFormatter.FormatNumber(Coin));
+        }
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

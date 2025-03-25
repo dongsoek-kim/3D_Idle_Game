@@ -72,6 +72,7 @@ public class DungeonController : MonoBehaviour
             GetDrop();
             Debug.Log(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint.position);
             party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
+            GameManager.Instance.ingameUI.FillBossGauge();
         }
         catch (Exception ex)
         {

@@ -5,15 +5,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System.Numerics;
 
 public class MonsterBase : MonoBehaviour
 {
     public GameObject healthBarPrefab;     
     private GameObject healthBarInstance;
     Image healthBarImage;
-    public float currentHealth;
+    public BigInteger currentHealth;
     public MonsterData monsterData;
-    public TextMeshPro skillText;
+    public TextMeshProUGUI healthText;
     public Player target;
     public Canvas worldCanvas;
     public float atttackdelay;
@@ -22,13 +23,13 @@ public class MonsterBase : MonoBehaviour
     public Action onDeath;
     public void Start()
     { 
-        currentHealth = monsterData.maxHealth;
+        currentHealth = (BigInteger)monsterData.maxHealth;
         FindWorldCanvas();
         healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
         Image[] images = healthBarInstance.GetComponentsInChildren<Image>();
         healthBarImage = images.FirstOrDefault(img => img.gameObject != healthBarInstance);
         healthBarInstance.transform.SetParent(worldCanvas.transform);
-        //skillText.text = monsterData.skillName;
+        healthText = healthBarInstance.GetComponentInChildren<TextMeshProUGUI>();
 
         atttackdelay = monsterData.attackSpeed;
     }
@@ -57,15 +58,16 @@ public class MonsterBase : MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger("isAttack");
-        target.Hit(monsterData.damage);
+        target.Hit((BigInteger)monsterData.damage);
     }
 
-    public  void Hit(float damage)
+    public  void Hit(BigInteger attackPower)
     {
         animator.SetTrigger("isHit");
-        currentHealth -= damage;
+        currentHealth -= attackPower;
         if (currentHealth <= 0)
         {
+            currentHealth= 0;
             Die();
         }
     }
@@ -90,9 +92,10 @@ public class MonsterBase : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
+        healthBarInstance.transform.position = transform.position + UnityEngine.Vector3.up * 4f;
         healthBarInstance.transform.rotation = transform.rotation;
-        float healthPercentage = currentHealth / monsterData.maxHealth;
+        healthText.text = $"{currentHealth}/{monsterData.maxHealth}";
+        float healthPercentage = (float)currentHealth / monsterData.maxHealth;
         healthBarImage.fillAmount = healthPercentage;
     }
 
