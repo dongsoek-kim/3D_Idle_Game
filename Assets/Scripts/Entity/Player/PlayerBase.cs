@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.RestService;
 using UnityEngine;
+using UnityEngine.UI;
+#nullable enable
 
 public class PlayerBase: MonoBehaviour
 {
@@ -9,47 +12,70 @@ public class PlayerBase: MonoBehaviour
 
     public GameObject healthBarPrefab;
     private GameObject healthBarInstance;
+    Image healthBarImage;
     public float currentHealth;
-
     private Canvas worldCanvas;
-
-    MonsterBase target;
-
+    public Animator animator;
+    public float atttackdelay;
+    MonsterBase? target;
     public virtual void Start()
     {
         currentHealth = characterData.maxHealth;
-
         worldCanvas = FindObjectOfType<Canvas>();
+        animator = GetComponent<Animator>();
 
         healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
+        Image[] images = healthBarInstance.GetComponentsInChildren<Image>();
+        healthBarImage = images.FirstOrDefault(img => img.gameObject != healthBarInstance);
         healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
         healthBarInstance.transform.rotation = transform.rotation;
         healthBarInstance.transform.SetParent(worldCanvas.transform);
+
+        atttackdelay = characterData.attackSpeed;
     }
     private void Update()
     {
         UpdateHealthBar();
         healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
+        if (target != null)
+        {
+            if (atttackdelay > Time.deltaTime)
+            {
+                atttackdelay -= Time.deltaTime;
+            }
+            else
+            {
+                Attack();
+                atttackdelay = characterData.attackSpeed;
+            }
+        }
     }
 
     public void UpdateHealthBar()
     {
         float healthPercentage = currentHealth / characterData.maxHealth;
-        healthBarInstance.GetComponentInChildren<UnityEngine.UI.Image>().fillAmount = healthPercentage;
+        healthBarImage.fillAmount = healthPercentage;
     }
 
-    public void GetTarget(MonsterBase monster)
+    public void GetTarget(MonsterBase? monster)
     {
         target = monster;
-        Debug.Log($"{characterData.name}target:  + {target.monsterData.monsterName}");
+        Debug.Log($"{characterData.name}target:{target?.monsterData.monsterName}");
     }
     public virtual void Attack()
     {
-        Debug.Log("Player Attack");
+        target?.Hit(characterData.damage);
+        animator.SetTrigger("isAttack");
     }
-    public virtual void Hit()
+    public virtual void Hit(float damage)
     {
-        Debug.Log("Player Hit");
+        animator.SetTrigger("isHit");
+        currentHealth -= damage;
+        
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
     public virtual void Die()
     {
@@ -59,5 +85,4 @@ public class PlayerBase: MonoBehaviour
     {
         Debug.Log("Using skill");
     }
-
 }

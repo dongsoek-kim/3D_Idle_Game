@@ -2537,6 +2537,13 @@ MonoBehaviour:
   healthBarPrefab: {fileID: 3715729364789494505, guid: fddb3a59dd63c6a42b7d45c847dcd87a,
     type: 3}
   currentHealth: 0
+  animator: {fileID: 2511715748091864152}
+  atttackdelay: 0
+  animationData:
+    isHit: 
+    isAttack: 
+    isDie: 
+    isMove: 
 --- !u!1 &9185049074355188985
 GameObject:
   m_ObjectHideFlags: 0

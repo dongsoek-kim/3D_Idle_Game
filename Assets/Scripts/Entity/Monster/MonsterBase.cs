@@ -1,59 +1,81 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+
 public class MonsterBase : MonoBehaviour
 {
     public GameObject healthBarPrefab;     
     private GameObject healthBarInstance;
+    Image healthBarImage;
     public float currentHealth;
-
     public MonsterData monsterData;
     public TextMeshPro skillText;
-
-    public int targetSlot;
-
+    public PlayerBase target;
     private Canvas worldCanvas;
-    public virtual void Start()
+    public float atttackdelay;
+    public Animator animator;
+
+    public Action onDeath;
+    public void Start()
     { 
         currentHealth = monsterData.maxHealth;
-
         worldCanvas = FindObjectOfType<Canvas>();
-
-        healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform); 
-        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
-        healthBarInstance.transform.rotation = transform.rotation;
+        healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
+        Image[] images = healthBarInstance.GetComponentsInChildren<Image>();
+        healthBarImage = images.FirstOrDefault(img => img.gameObject != healthBarInstance);
         healthBarInstance.transform.SetParent(worldCanvas.transform);
         //skillText.text = monsterData.skillName;
+
+        atttackdelay = monsterData.attackSpeed;
     }
-    public virtual void Update()
+    public void Update()
     {
         UpdateHealthBar();
-        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
+
+        if (currentHealth >= 0)
+        {
+            if (target != null)
+            {
+                if (atttackdelay > Time.deltaTime)
+                {
+                    atttackdelay -= Time.deltaTime;
+                }
+                else
+                {
+                    Attack();
+                    atttackdelay = monsterData.attackSpeed;
+                }
+            }
+        }
     }
     
-    public virtual void TakeDamage(float damage)
+
+    public virtual void Attack()
     {
+        animator.SetTrigger("isAttack");
+        target.Hit(monsterData.damage);
+    }
+
+    public virtual void Hit(float damage)
+    {
+        animator.SetTrigger("isHit");
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
             Die();
         }
     }
-    public virtual void Attack()
-    {
-        Debug.Log("MonsterData Attack");
-    }
-
-    public virtual void Hit()
-    {
-        Debug.Log("MonsterData Hit");
-    }
 
     public virtual void Die()
     {
-        Debug.Log("MonsterData Die");
+        animator.SetTrigger("isDead");
+        onDeath?.Invoke();
+        Destroy(this, 2);
+        Destroy(healthBarInstance, 2);
     }
 
     public virtual void Drop()
@@ -68,7 +90,23 @@ public class MonsterBase : MonoBehaviour
 
     void UpdateHealthBar()
     {
+        healthBarInstance.transform.position = transform.position + Vector3.up * 4f;
+        healthBarInstance.transform.rotation = transform.rotation;
         float healthPercentage = currentHealth / monsterData.maxHealth;
-        healthBarInstance.GetComponentInChildren<UnityEngine.UI.Image>().fillAmount = healthPercentage;
+        healthBarImage.fillAmount = healthPercentage;
+    }
+
+    public void Gettarget(PlayerBase[] partyMembers)
+    {
+        int highestAggro = 0;
+        for (int i = 0; i < partyMembers.Length; i++)
+        {
+            if (partyMembers[i].characterData.aggro > partyMembers[highestAggro].characterData.aggro)
+            {
+                highestAggro = i;
+            }
+        }
+        target = partyMembers[highestAggro];
+        Debug.Log($"{monsterData.monsterName} target: {target.characterData.name}");
     }
 }

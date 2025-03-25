@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   CharacterName: "\uC9C4\uB3CC\uC774"
-  aggro: 0
-  maxHealth: 50
+  aggro: 150
+  maxHealth: 150
   attackSpeed: 1
   damage: 3

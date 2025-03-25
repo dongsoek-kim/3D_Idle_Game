@@ -51,12 +51,13 @@ public class MapSpawner : MonoBehaviour
         if (mapSpawnQueue.Count > 3)
         {
             Map mapToDestroy = mapSpawnQueue.Dequeue();
-            StartCoroutine(DestroyObjectAfterDelay(mapToDestroy,5f));           
+            StartCoroutine(DestroyAfterDelay(mapToDestroy, 5f));
         }
+
     }
-    private IEnumerator DestroyObjectAfterDelay(Map mapToDestroy, float delay)
+    public IEnumerator DestroyAfterDelay(Map mapToDestroy,float delay)
     {
-        yield return new WaitForSeconds(delay); 
+        yield return new WaitForSeconds(delay);
         Destroy(mapToDestroy.gameObject);
     }
     public int GetRandomNumber()

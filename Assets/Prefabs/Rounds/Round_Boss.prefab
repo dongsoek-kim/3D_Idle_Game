@@ -139,9 +139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c62a2e0765e9846a91e9bd0e79f2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  end: {fileID: 0}
-  party: {fileID: 0}
-  monsterSpawn: {fileID: 0}
+  endPoint: {fileID: 0}
+  partyPoint: {fileID: 0}
+  monsterSpawnPoint: {fileID: 0}
   monster: {fileID: 0}
 --- !u!1 &7587632750208336691
 GameObject:

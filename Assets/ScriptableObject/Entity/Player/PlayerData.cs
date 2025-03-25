@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewCharacter", menuName = "Character/CharacterData")]
 public class CharacterData : ScriptableObject
 {
-    public GameObject prefab;
     [Header("CharacterData Stats")]
     public string CharacterName;
     public float aggro;

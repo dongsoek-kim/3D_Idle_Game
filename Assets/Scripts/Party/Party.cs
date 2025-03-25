@@ -9,6 +9,7 @@ public class Party : MonoBehaviour
 {
     public PlayerBase[] partyMembers;
     private NavMeshAgent agent;
+    bool isMoving = false;
     void Awake()
     {
         if (agent == null)
@@ -18,11 +19,11 @@ public class Party : MonoBehaviour
     }
     void Start()
     {
-        //partyMembers = new PlayerBase[3];
-        foreach (PlayerBase member in partyMembers)
-        {
-            if(member!=null)
-            Instantiate(member, this.transform);
+       for (int i = 0; i < partyMembers.Length; i++)
+        { if (partyMembers[i] != null)
+            {     
+                partyMembers[i] = Instantiate(partyMembers[i], this.transform);
+            }
         }
     }
 
@@ -35,20 +36,46 @@ public class Party : MonoBehaviour
 
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+            if ((!agent.hasPath || agent.velocity.sqrMagnitude == 0f)&&isMoving)
             {
                 agent.ResetPath();
                 agent.isStopped = true;
+                isMoving = false;
+                DungeonController.Instance.Fight();
+                foreach (PlayerBase member in partyMembers)
+                {
+                    if (member != null)
+                    {
+                        member.animator.SetBool("isMove", false);
+                    }
+                }
             }
         }
     }
 
     public void MoveParty(Transform nextPartyPoint)
     {
-        agent.SetDestination(nextPartyPoint.position);
         if (nextPartyPoint != null)
         {
+            isMoving = true;
+            agent.isStopped = false;
             agent.SetDestination(nextPartyPoint.position);
+            if (!agent.isOnNavMesh)
+            {
+                Debug.LogError("Agent is not on the NavMesh.");
+            }
+
+            if (agent.isStopped)
+            {
+                Debug.Log("Agent is stopped.");
+            }
+            foreach (PlayerBase member in partyMembers)
+            {
+                if (member != null)
+                {
+                    member.animator.SetBool("isMove", true);
+                }
+            }
         }
     }
     
@@ -60,7 +87,10 @@ public class Party : MonoBehaviour
             {
                 member.GetTarget(target);
             }
+            else
+            {
+                Debug.Log("No member in party");
+            }
         }
-
     }
 }

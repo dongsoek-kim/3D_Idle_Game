@@ -296,7 +296,9 @@ MonoBehaviour:
   currentHealth: 0
   monsterData: {fileID: 11400000, guid: 17e6d798b9a25df4fa45871363206a5f, type: 2}
   skillText: {fileID: 0}
-  targetSlot: 0
+  target: {fileID: 0}
+  atttackdelay: 0
+  animator: {fileID: 7843439030199264021}
 --- !u!1 &5599594304742488523
 GameObject:
   m_ObjectHideFlags: 0
