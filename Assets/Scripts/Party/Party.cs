@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class Party : MonoBehaviour
 {
-    public PlayerBase[] partyMembers;
+    public Player[] partyMembers;
     private NavMeshAgent agent;
     bool isMoving = false;
     void Awake()
@@ -43,7 +43,7 @@ public class Party : MonoBehaviour
                 isMoving = false;
                 DungeonController.Instance.Fight();
                 MapManager.Instance.mapSpawner.DestroyMap();
-                foreach (PlayerBase member in partyMembers)
+                foreach (Player member in partyMembers)
                 {
                     if (member != null)
                     {
@@ -70,7 +70,7 @@ public class Party : MonoBehaviour
             {
                 Debug.Log("Agent is stopped.");
             }
-            foreach (PlayerBase member in partyMembers)
+            foreach (Player member in partyMembers)
             {
                 if (member != null)
                 {
@@ -82,7 +82,7 @@ public class Party : MonoBehaviour
     
     public void GetTarget(MonsterBase target)
     {
-        foreach (PlayerBase member in partyMembers)
+        foreach (Player member in partyMembers)
         {
             if (member != null)
             {

@@ -14,7 +14,7 @@ public class MonsterBase : MonoBehaviour
     public float currentHealth;
     public MonsterData monsterData;
     public TextMeshPro skillText;
-    public PlayerBase target;
+    public Player target;
     public Canvas worldCanvas;
     public float atttackdelay;
     public Animator animator;
@@ -54,13 +54,13 @@ public class MonsterBase : MonoBehaviour
     }
     
 
-    public virtual void Attack()
+    public void Attack()
     {
         animator.SetTrigger("isAttack");
         target.Hit(monsterData.damage);
     }
 
-    public virtual void Hit(float damage)
+    public  void Hit(float damage)
     {
         animator.SetTrigger("isHit");
         currentHealth -= damage;
@@ -70,7 +70,7 @@ public class MonsterBase : MonoBehaviour
         }
     }
 
-    public virtual void Die()
+    public void Die()
     {
         animator.SetTrigger("isDead");
         onDeath?.Invoke();
@@ -78,12 +78,12 @@ public class MonsterBase : MonoBehaviour
         Destroy(healthBarInstance, 2);
     }
 
-    public virtual void Drop()
+    public int Drop()
     {
-        Debug.Log("MonsterData Drop");
+        return monsterData.basecoin;
     }
 
-    public virtual void UseSkill()
+    public  void UseSkill()
     {
         Debug.Log("Using skill");
     }
@@ -96,7 +96,7 @@ public class MonsterBase : MonoBehaviour
         healthBarImage.fillAmount = healthPercentage;
     }
 
-    public void Gettarget(PlayerBase[] partyMembers)
+    public void Gettarget(Player[] partyMembers)
     {
         int highestAggro = 0;
         for (int i = 0; i < partyMembers.Length; i++)

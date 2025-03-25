@@ -1,13 +1,25 @@
 using UnityEngine;
 using System.Numerics;
+using UnityEngine.Experimental.Rendering;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public BigInteger Coin;
-    
+    [Header("player")]
+    public int attckPowerStack;
+    public int HealthStack;
+    private BigInteger coin; 
 
-    private static GameManager instance;  // Singleton 인스턴스
 
+    [Header("Dungeonscene")]
+    public DungeonController dungeonController;
+    public InGameUI ingameUI;
+
+    public int Stage { get; set; }
+
+
+    private static GameManager instance;
+    public GameManager gameManager;
     public static GameManager Instance
     {
         get
@@ -22,16 +34,63 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
-
-    // 게임 매니저 로직을 여기에 추가
-    public void Start()
+    private void Awake()
     {
-        Debug.Log(AlphabetNumberFormatter.FormatNumber(Coin));
-        Debug.Log("게임 시작!");
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
+        gameManager = GetComponent<GameManager>();
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void EndGame()
+    private void OnDisable()
     {
-        Debug.Log("게임 종료!");
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+
+    public BigInteger Coin
+    {
+        get => coin;
+        set
+        {
+            coin = value;
+            if (ingameUI == null)
+            {
+                Debug.LogError("ingameUI가 null입니다.");
+            }
+            else
+            {
+                ingameUI.UPdateCoin(coin);
+            }
+        }
+    }
+    public void UsedCoin(BigInteger bigInteger)
+    {
+        coin -= bigInteger;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "DungeonScenes")
+        {
+            if (dungeonController == null)
+            {
+                dungeonController = FindObjectOfType<DungeonController>();
+            }
+            if (ingameUI == null)
+            {
+                ingameUI = FindObjectOfType<InGameUI>();
+            }
+        }
     }
 }
+

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 #nullable enable
 
-public class PlayerBase: MonoBehaviour
+public class Player: MonoBehaviour
 {
     public CharacterData characterData;
 
@@ -19,7 +19,7 @@ public class PlayerBase: MonoBehaviour
     public float atttackdelay;
     MonsterBase? target;
 
-    public virtual void Start()
+    public void Start()
     {
         currentHealth = characterData.maxHealth;
         FindWorldCanvas();
@@ -62,12 +62,12 @@ public class PlayerBase: MonoBehaviour
         target = monster;
         Debug.Log($"{characterData.name}target:{target?.monsterData.monsterName}");
     }
-    public virtual void Attack()
+    public  void Attack()
     {
         target?.Hit(characterData.damage);
         animator.SetTrigger("isAttack");
     }
-    public virtual void Hit(float damage)
+    public  void Hit(float damage)
     {
         animator.SetTrigger("isHit");
         currentHealth -= damage;
@@ -77,11 +77,11 @@ public class PlayerBase: MonoBehaviour
             Die();
         }
     }
-    public virtual void Die()
+    public void Die()
     {
         Debug.Log("Player Die");
     }
-    public virtual void UseSkill()
+    public  void UseSkill()
     {
         Debug.Log("Using skill");
     }

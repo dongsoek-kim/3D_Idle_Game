@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class DungeonController : MonoBehaviour
@@ -10,6 +11,7 @@ public class DungeonController : MonoBehaviour
     public MapManager mapManager;
     public CoinPool coinpool;
     private static DungeonController instance;
+    public int Stage;
     public static DungeonController Instance
     {
         get
@@ -40,6 +42,7 @@ public class DungeonController : MonoBehaviour
     }
     void Start()
     {
+        Stage = GameManager.Instance.Stage;
         mapManager.mapSpawner.StartGame();
         mapManager.mapSpawner.DequeueMap();
         party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
@@ -48,7 +51,7 @@ public class DungeonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void Fight()
     {
@@ -66,7 +69,7 @@ public class DungeonController : MonoBehaviour
             Debug.Log("Monster Die");
             party.GetTarget(null);
             coinpool.OnMonsterDeath(monster.transform);
-            //mapManager.mapSpawner.MapSpawn();
+            GetDrop();
             Debug.Log(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint.position);
             party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
         }
@@ -74,5 +77,10 @@ public class DungeonController : MonoBehaviour
         {
             Debug.LogError("Exception occurred: " + ex.Message);
         }
+    }
+    public void GetDrop()
+    {
+        GameManager.Instance.Coin+=((BigInteger)(monster.Drop() * (1 + Stage * 10000)));
+        Debug.Log(GameManager.Instance.Coin);
     }
 }

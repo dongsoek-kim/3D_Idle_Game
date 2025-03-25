@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 
@@ -13,4 +14,6 @@ public class MonsterData : ScriptableObject
     public float damage;         
     public float attackSpeed;
     public string skillName;
+    public int basecoin;
+
 }

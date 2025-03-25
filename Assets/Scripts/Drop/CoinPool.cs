@@ -51,14 +51,13 @@ public class CoinPool : MonoBehaviour
 
     public void OnMonsterDeath(Transform spawnPoint)
     {
-        Debug.Log("동전뿌리기");
-        for (int i = 0; i < coinPool.Count; i++)  // 풀에 있는 동전 수만큼 반복
+        for (int i = 0; i < coinPool.Count; i++)  
         {
-            GameObject coin = GetCoin();  // 동전 풀에서 하나씩 꺼내기
+            GameObject coin = GetCoin(); 
             if (coin != null)
             {
-                coin.SetActive(true);  // 동전 활성화
-                coin.GetComponent<Coin>().CoinMove(spawnPoint, this);  // 동전 연출 실행
+                coin.SetActive(true);  
+                coin.GetComponent<Coin>().CoinMove(spawnPoint, this); 
             }
         }
     }
