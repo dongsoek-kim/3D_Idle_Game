@@ -32,8 +32,8 @@ public class Player: MonoBehaviour
     {
         if(attackPower==0 && maxhealth ==0)
         {
-            attackPower = (BigInteger)characterData.baseAttackPower;
-            maxhealth = (BigInteger)characterData.baseHealth;
+            attackPower = GameManager.Instance.CurplayerAttck;
+            maxhealth = GameManager.Instance.CurplayerHealth;
             Debug.Log("히히초기화");
 
             Debug.Log("Health" + AlphabetNumberFormatter.FormatNumber(maxhealth));

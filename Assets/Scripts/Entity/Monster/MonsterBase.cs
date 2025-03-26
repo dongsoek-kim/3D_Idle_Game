@@ -6,12 +6,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System.Numerics;
+using UnityEditor.SceneManagement;
 
 public class MonsterBase: MonoBehaviour
 {
     public GameObject healthBarPrefab;     
     private GameObject healthBarInstance;
     Image healthBarImage;
+    public BigInteger maxHealth;
     public BigInteger currentHealth;
     public MonsterData monsterData;
     public TextMeshProUGUI healthText;
@@ -21,8 +23,9 @@ public class MonsterBase: MonoBehaviour
     public Animator animator;
     public Action onDeath;
     public void Start()
-    { 
-        currentHealth = (BigInteger)monsterData.maxHealth;
+    {
+        maxHealth= (BigInteger)(monsterData.maxHealth) * BigInteger.Pow(100, GameManager.Instance.Stage);
+        currentHealth = maxHealth;
         FindWorldCanvas();
         healthBarInstance = Instantiate(healthBarPrefab, worldCanvas.transform);
         Image[] images = healthBarInstance.GetComponentsInChildren<Image>();
@@ -56,7 +59,7 @@ public class MonsterBase: MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger("isAttack");
-        target.Hit((BigInteger)monsterData.damage);
+        target.Hit((BigInteger)(monsterData.damage)* BigInteger.Pow(10, GameManager.Instance.Stage));
         if (target.IsDead) target = null;
     }
 
@@ -94,8 +97,8 @@ public class MonsterBase: MonoBehaviour
 
         healthBarInstance.transform.position = transform.position + UnityEngine.Vector3.up * 4f;
         healthBarInstance.transform.rotation = transform.rotation;
-        healthText.text = $"{currentHealth}/{monsterData.maxHealth}";
-        float healthPercentage = (float)currentHealth / monsterData.maxHealth;
+        healthText.text = $"{AlphabetNumberFormatter.FormatNumber(currentHealth)}/{AlphabetNumberFormatter.FormatNumber(maxHealth)}";
+        float healthPercentage = (float)currentHealth / maxHealth;
         healthBarImage.fillAmount = healthPercentage;
     }
 

@@ -45,8 +45,8 @@ public class MonsterManager : MonoBehaviour
     }
     public MonsterBase SpawnBossMonster(Transform monsterSpawn)
     {
-        int StageIndex = GameManager.Instance.stage;
-        MonsterBase newMonster = Instantiate(Bossmonsters[StageIndex], monsterSpawn.position, monsterSpawn.rotation);
+        int StageIndex = GameManager.Instance.Stage;
+        MonsterBase newMonster = Instantiate(Bossmonsters[0], monsterSpawn.position, monsterSpawn.rotation);
         return newMonster;
     }
 }

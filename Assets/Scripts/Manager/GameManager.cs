@@ -6,8 +6,6 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("InGame")]
-    public int stage;
 
     [Header("player")]
     public Party party;

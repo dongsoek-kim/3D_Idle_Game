@@ -20,6 +20,7 @@ public class StageClearUI : BaseUI
 
     public void OnNextStageButton()
     {
+        GameManager.Instance.Stage += 1;
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
