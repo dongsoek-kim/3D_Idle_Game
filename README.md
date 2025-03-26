@@ -30,17 +30,15 @@ Unity
 
 #주요기능
 ----
-navMash를 이용한 자동이동
+>navMash를 이용한 자동이동   
+>![image](https://github.com/user-attachments/assets/ceb7aa9f-7050-4d0e-a3bc-bfdef7a4f8b0)
 
-![image](https://github.com/user-attachments/assets/ceb7aa9f-7050-4d0e-a3bc-bfdef7a4f8b0)
+>다음 맵에 도착시 맵생성 및 이전 맵 파괴 맵은 큐에 저장하여 관리   
+>![Image](https://github.com/user-attachments/assets/d60f9ff1-5548-4d2d-98a4-b0783a6089bb)
 
-다음 맵에 도착시 맵생성 및 이전 맵 파괴 맵은 큐에 저장하여 관리
-
-BigInt
-
-![image](https://github.com/user-attachments/assets/2bb9b253-778c-4199-9078-c60251d8bed9)
-
-큰수 처리를 위한 BigInt 1000단위로 끊어 A,B,C...순으로 바뀐다
+>BigInt   
+>![image](https://github.com/user-attachments/assets/2bb9b253-778c-4199-9078-c60251d8bed9)   
+>큰수 처리를 위한 BigInt 1000단위로 끊어 A,B,C...순으로 바뀐다
 
 스테이지 구성
 ----
