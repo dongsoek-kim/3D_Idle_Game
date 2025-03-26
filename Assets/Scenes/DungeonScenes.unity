@@ -294,8 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameUI: {fileID: 1637068160}
   gameEndUI: {fileID: 1143867800}
-  pauseUI: {fileID: 1527184879}
-  uIManager: {fileID: 0}
+  stageClearUI: {fileID: 0}
 --- !u!1 &314301221
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,9 +378,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1713368219}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnRestartButton
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -632,9 +631,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1713368219}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnAttackPowerPlus
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1545,9 +1544,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1713368219}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnHealthPlus
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2093,6 +2092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5016c5a505c832d4488a5420833e8689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restartButton: {fileID: 314301223}
 --- !u!1 &1184424120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,6 +2779,8 @@ MonoBehaviour:
   coin: {fileID: 820955199}
   BossGauge: {fileID: 676458275}
   BossButton: {fileID: 942863924}
+  attackButton: {fileID: 331184104}
+  healthButton: {fileID: 913533761}
 --- !u!1 &1713368218
 GameObject:
   m_ObjectHideFlags: 0

@@ -78,7 +78,7 @@ public class DungeonController : MonoBehaviour
                 party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
             }
             else 
-            { Debug.Log("StageClear"); }
+            { GameManager.Instance.StageClear(); }
         }
         catch (Exception ex)
         {

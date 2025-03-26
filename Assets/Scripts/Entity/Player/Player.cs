@@ -23,18 +23,23 @@ public class Player: MonoBehaviour
     MonsterBase? target;
 
     private BigInteger attackPower;
-    private BigInteger Maxhealth;
-
+    private BigInteger maxhealth;
+    public BigInteger AttkacPower { get { return attackPower; } }
+    public BigInteger Maxhealth { get { return maxhealth; } }
     private bool isDead;
     public bool IsDead { get { return isDead; } }
     public void Start()
     {
-        if(attackPower==0 &&Maxhealth ==0)
+        if(attackPower==0 && maxhealth ==0)
         {
             attackPower = (BigInteger)characterData.baseAttackPower;
-            Maxhealth = (BigInteger)characterData.baseHealth;
+            maxhealth = (BigInteger)characterData.baseHealth;
+            Debug.Log("È÷È÷ÃÊ±âÈ­");
+
+            Debug.Log("Health" + AlphabetNumberFormatter.FormatNumber(maxhealth));
+            Debug.Log("attackPower" + AlphabetNumberFormatter.FormatNumber(attackPower));
         }
-        currentHealth = Maxhealth;
+        currentHealth = maxhealth;
         FindWorldCanvas();
         animator = GetComponent<Animator>();
 
@@ -67,8 +72,8 @@ public class Player: MonoBehaviour
     {
         healthBarInstance.transform.position = transform.position + UnityEngine.Vector3.up * 4f;
         healthBarInstance.transform.rotation = transform.rotation;
-        healthText.text = $"{AlphabetNumberFormatter.FormatNumber(currentHealth)}/{AlphabetNumberFormatter.FormatNumber(Maxhealth)}";
-        float healthPercentage = (float)currentHealth / (float)Maxhealth;
+        healthText.text = $"{AlphabetNumberFormatter.FormatNumber(currentHealth)}/{AlphabetNumberFormatter.FormatNumber(maxhealth)}";
+        float healthPercentage = (float)currentHealth / (float)maxhealth;
         healthBarImage.fillAmount = healthPercentage;
     }
 
@@ -94,7 +99,6 @@ public class Player: MonoBehaviour
     }
     public void Die()
     {
-        Debug.Log("À¸¾Ó");
         animator.SetTrigger("isDead");
         isDead = true;
         GameManager.Instance.PartyDefeat();
@@ -117,15 +121,24 @@ public class Player: MonoBehaviour
     public void UpgradeAttackPower(BigInteger _attackPower)
     {
         attackPower *= (1 + _attackPower);
-        Debug.Log("AttackPower" + AlphabetNumberFormatter.FormatNumber(attackPower));
+        GameManager.Instance.CurplayerAttck = attackPower;
     }
 
     public void UpgradeHealth(BigInteger _health)
     {
-        Maxhealth *= (1 + _health);
-        currentHealth += Maxhealth / 2;
-        if (currentHealth > Maxhealth) currentHealth = Maxhealth;
-        Debug.Log("Health" + AlphabetNumberFormatter.FormatNumber(Maxhealth));
+        maxhealth *= (1 + _health);
+        GameManager.Instance.CurplayerHealth = maxhealth;
+        currentHealth += maxhealth / 2;
+        if (currentHealth > maxhealth) currentHealth = maxhealth;
     }
-    
+
+    public void Init(BigInteger _attakcPower,BigInteger _health)
+    {
+        attackPower = _attakcPower;
+        maxhealth = _health;
+        currentHealth = maxhealth;
+        Debug.Log("½ºÅÝ ÀÌ¾îÁü");
+        Debug.Log("Health" + AlphabetNumberFormatter.FormatNumber(maxhealth));
+        Debug.Log("attackPower" + AlphabetNumberFormatter.FormatNumber(attackPower));
+    }
 }

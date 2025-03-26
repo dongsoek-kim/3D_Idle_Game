@@ -9,7 +9,7 @@ public enum UIState
 {
     InGame,
     GameEnd,
-    Pause
+    StageClear
 }
 
 public class UIManager : MonoBehaviour
@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] public InGameUI inGameUI;
     [SerializeField] public GameEndUI gameEndUI;
-    [SerializeField] public PauseUI pauseUI;
+    [SerializeField] public StageClearUI stageClearUI;
 
 
     private UIState currentState;
@@ -30,8 +30,8 @@ public class UIManager : MonoBehaviour
         inGameUI.Init(this);
         gameEndUI = GetComponentInChildren<GameEndUI>(true);
         gameEndUI.Init(this);
-        pauseUI = GetComponentInChildren<PauseUI>(true);
-        pauseUI.Init(this);
+        stageClearUI = GetComponentInChildren<StageClearUI>(true);
+        stageClearUI.Init(this);
         ChangeState(UIState.InGame);
     }
     public void Init()
@@ -40,8 +40,8 @@ public class UIManager : MonoBehaviour
         inGameUI.Init(this);
         gameEndUI = GetComponentInChildren<GameEndUI>(true);
         gameEndUI.Init(this);
-        pauseUI = GetComponentInChildren<PauseUI>(true);
-        pauseUI.Init(this);
+        stageClearUI = GetComponentInChildren<StageClearUI>(true);
+        stageClearUI.Init(this);
         ChangeState(UIState.InGame);
     }
     public void ChangeState(UIState state)
@@ -49,6 +49,6 @@ public class UIManager : MonoBehaviour
         currentState = state;
         inGameUI.SetActive(currentState);
         gameEndUI.SetActive(currentState);
-        pauseUI.SetActive(currentState);
+        stageClearUI.SetActive(currentState);
     }
 }

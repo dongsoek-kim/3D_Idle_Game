@@ -1,29 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class GameEndUI : BaseUI
-{
 
-    public Button restartButton;
+public class StageClearUI : BaseUI
+{
+    public Button NextStageButton;
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
-        if (restartButton != null)
+        if (NextStageButton != null)
         {
-            restartButton.onClick.RemoveAllListeners();
-            restartButton.onClick.AddListener(OnRestartButton);
+            NextStageButton.onClick.RemoveAllListeners();
+            NextStageButton.onClick.AddListener(OnNextStageButton);
         }
     }
-    protected override UIState GetUIState()
-    {
-        return UIState.GameEnd;
-    }
-    public void OnRestartButton()
+
+
+    public void OnNextStageButton()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
+    }
+    protected override UIState GetUIState()
+    {
+        return UIState.StageClear;
     }
 }

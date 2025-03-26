@@ -24,7 +24,8 @@ public class GameManager : MonoBehaviour
     BigInteger currAttck = 1;
     BigInteger prevHealth = 0;
     BigInteger currHealth = 1;
-
+    public BigInteger CurplayerAttck { get; set; }
+    public BigInteger CurplayerHealth { get; set; }
     [Header("Dungeonscene")]
     public DungeonController dungeonController;
     public UIManager uIManager;
@@ -58,6 +59,11 @@ public class GameManager : MonoBehaviour
         }
 
         gameManager = GetComponent<GameManager>();
+
+        attckUpgradePriceBase = 10;
+        HealthUpgradePriceBase = 10;
+        attckUpgradePrice = 10;
+        HealthUpgradePrice = 10;
     }
     private void OnEnable()
     {
@@ -68,19 +74,23 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    public void Start()
-    {
-        attckUpgradePriceBase = 10;
-        HealthUpgradePriceBase = 10;
-        attckUpgradePrice = 10;
-        HealthUpgradePrice= 10;
-
-    }
     public void Init()
     {
-        Debug.Log("게임 재시작");
+        Debug.Log("시작");
         Time.timeScale = 1f;
         uIManager.Init();
+        uIManager.inGameUI.UPdateCoin(coin);
+        uIManager.inGameUI.UpGradeAttak(currAttck, attckUpgradePrice);
+        uIManager.inGameUI.UpGradeHealth(currHealth, HealthUpgradePrice);
+        foreach (Player mamber in DungeonController.Instance.party.partyMembers)
+        {
+            if (mamber != null)
+            {
+                if (CurplayerHealth == 0) CurplayerHealth=(BigInteger)mamber.characterData.baseHealth;
+                if (CurplayerAttck == 0) CurplayerAttck = (BigInteger)mamber.characterData.baseAttackPower;
+                mamber.Init(CurplayerAttck, CurplayerHealth);
+            }
+        }
     }
     public void PartyDefeat()
     {   
@@ -92,6 +102,11 @@ public class GameManager : MonoBehaviour
             }
         }
         StartCoroutine(StopGameAfterDelay(2f));
+    }
+    public void StageClear()
+    {
+        Debug.Log("StageClaer");
+        uIManager.ChangeState(UIState.StageClear);
     }
     public BigInteger Coin
     {
@@ -172,8 +187,8 @@ public class GameManager : MonoBehaviour
             {
                 party = FindObjectOfType<Party>();
             }
+            Init();
         }
-        Init();
     }
     private IEnumerator StopGameAfterDelay(float delay)
     {

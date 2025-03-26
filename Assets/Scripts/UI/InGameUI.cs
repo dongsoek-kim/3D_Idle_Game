@@ -25,11 +25,13 @@ public class InGameUI : BaseUI
 
         if (attackButton != null)
         {
+            attackButton.onClick.RemoveAllListeners();
             attackButton.onClick.AddListener(GameManager.Instance.OnAttackPowerPlus);
         }
 
         if (healthButton != null)
         {
+            healthButton.onClick.RemoveAllListeners();
             healthButton.onClick.AddListener(GameManager.Instance.OnHealthPlus);
         }
     }
