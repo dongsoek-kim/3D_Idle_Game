@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InGameUI : MonoBehaviour
+public class InGameUI : BaseUI
 {
     public TextMeshProUGUI attackStack;
     public TextMeshProUGUI attackValue;
@@ -16,6 +16,11 @@ public class InGameUI : MonoBehaviour
     public Button BossButton;
     private int currentHits = 0;
     private int maxHits = 5;
+    public override void Init(UIManager uiManager)
+    {
+        base.Init(uiManager);
+        currentHits = 0;
+    }
 
     public void Start()
     {
@@ -46,8 +51,8 @@ public class InGameUI : MonoBehaviour
         BossButton.gameObject.SetActive(true);
     }
 
-    public void Init()
+    protected override UIState GetUIState()
     {
-        currentHits = 0;
+        return UIState.InGame;
     }
 }
