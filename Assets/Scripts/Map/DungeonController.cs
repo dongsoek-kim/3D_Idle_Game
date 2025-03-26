@@ -51,11 +51,11 @@ public class DungeonController : MonoBehaviour
         party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    /// <summary>
+    /// 방에 도착하면 전투하기위한 메서드
+    /// 몬스터와 파티에게 타겟을 전달
+    /// 타겟이 있으면 자동전투
+    /// </summary>
     public void Fight()
     {
         monster = mapManager.mapSpawner.mapSpawnQueue.Peek().monster;
@@ -65,6 +65,11 @@ public class DungeonController : MonoBehaviour
         mapManager.mapSpawner.MapSpawn();
     }
 
+
+    /// <summary>
+    /// 몬스터가 사망하면 호출되는 메서드
+    /// 코인을 얻고 다음포인트로 이동한다
+    /// </summary>
     public void MonsterDie()
     {
         try

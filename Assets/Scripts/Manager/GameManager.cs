@@ -72,6 +72,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
+    /// <summary>
+    /// 씬 초기화시 값을 전달해주는 메서드
+    /// </summary>
     public void Init()
     {
         Debug.Log("시작");
@@ -90,6 +94,9 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// 파티가 전멸했는지 평가
+    /// </summary>
     public void PartyDefeat()
     {   
         foreach(Player member in party.partyMembers)
@@ -106,6 +113,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("StageClaer");
         uIManager.ChangeState(UIState.StageClear);
     }
+
+    /// <summary>
+    /// 코인이 변화하면 자동으로 값 전달
+    /// </summary>
     public BigInteger Coin
     {
         get => coin;

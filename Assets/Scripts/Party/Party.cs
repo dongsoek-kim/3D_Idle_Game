@@ -27,6 +27,10 @@ public class Party : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 파티 이동용 업데이트
+    /// 도착하면 반환값
+    /// </summary>
     void Update()
     {
         if (agent.pathPending)
@@ -54,6 +58,10 @@ public class Party : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 파티 이동용 Ai네비게이션 사용
+    /// </summary>
+    /// <param name="nextPartyPoint"></param>
     public void MoveParty(Transform nextPartyPoint)
     {
         if (nextPartyPoint != null)
@@ -71,6 +79,10 @@ public class Party : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// 파티맴버들에게 전달받은 타겟 재전달
+    /// </summary>
+    /// <param name="target"></param>
     public void GetTarget(MonsterBase target)
     {
         foreach (Player member in partyMembers)

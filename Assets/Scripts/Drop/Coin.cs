@@ -8,6 +8,13 @@ public class Coin : MonoBehaviour
     public float absorbDuration = 1f;
 
     private CoinPool coinPool;
+
+    /// <summary>
+    /// 코인의 움직임
+    /// 몬스터가 죽으면 소환
+    /// </summary>
+    /// <param name="spawnPosition"></param>
+    /// <param name="pool"></param>
     public void CoinMove(Transform spawnPosition, CoinPool pool)
     {
         coinPool = pool;
@@ -20,7 +27,6 @@ public class Coin : MonoBehaviour
                  .Append(transform.DOScale(Vector3.one, scaleDuration).SetEase(Ease.InQuad))  
                  .OnComplete(() =>
                  {
-                     // 사라짐
                      DOVirtual.DelayedCall(absorbDuration, () => {
                          ReturnToPool();  
                      });

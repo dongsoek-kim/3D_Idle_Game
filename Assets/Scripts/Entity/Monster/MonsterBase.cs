@@ -82,16 +82,18 @@ public class MonsterBase: MonoBehaviour
         Destroy(healthBarInstance, 2);
     }
 
+    /// <summary>
+    /// 코인 드랍 테이블
+    /// </summary>
+    /// <returns></returns>
     public int Drop()
     {
         return monsterData.basecoin;
     }
 
-    public  void UseSkill()
-    {
-        Debug.Log("Using skill");
-    }
-
+    /// <summary>
+    /// 머리위에 헬스바
+    /// </summary>
     void UpdateHealthBar()
     {
 
@@ -102,6 +104,10 @@ public class MonsterBase: MonoBehaviour
         healthBarImage.fillAmount = healthPercentage;
     }
 
+    /// <summary>
+    /// 목표(플레이어)를 잡는 시스템
+    /// </summary>
+    /// <param name="partyMembers"></param>
     public void Gettarget(Player[] partyMembers)
     {
         int highestAggro = 0;
@@ -117,15 +123,14 @@ public class MonsterBase: MonoBehaviour
 
     public void FindWorldCanvas()
     {
-        Canvas[] allCanvases = FindObjectsOfType<Canvas>();  // 씬에 있는 모든 Canvas를 가져옵니다.
+        Canvas[] allCanvases = FindObjectsOfType<Canvas>();  
 
         foreach (Canvas canvas in allCanvases)
         {
-            // WorldSpace 모드인 Canvas를 찾습니다.
             if (canvas.renderMode == RenderMode.WorldSpace)
             {
-                worldCanvas = canvas;  // WorldSpace Canvas를 설정
-                break;  // WorldSpace Canvas가 발견되면 루프 종료
+                worldCanvas = canvas;  
+                break;  
             }
         }
     }

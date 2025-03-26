@@ -30,7 +30,11 @@ public class MapSpawner : MonoBehaviour
         MapSpawn();
         MapSpawn();
     }
-
+    /// <summary>
+    /// 맵을 소환해주는 메서드
+    /// 이전맵의 끝포인트에
+    /// 소환할 맵의 시작포인트를 이어준다
+    /// </summary>
     public void MapSpawn()
     {
         if (onBoss)
@@ -60,6 +64,10 @@ public class MapSpawner : MonoBehaviour
             DequeueMap();
         }
     }
+    /// <summary>
+    /// 보스소환을 눌렀을때 가장 마지막 큐에 보스맵을 할당
+    /// 이후로 다른 맵은 소환하지않는다.
+    /// </summary>
     public void SpawnBossMap()
     {
         if (bossSpawned)
@@ -77,6 +85,10 @@ public class MapSpawner : MonoBehaviour
         mapSpawnQueue.Enqueue(newMap);
         bossSpawned = true;  
     }
+
+    /// <summary>
+    /// 맵을 생성할때마다 이전맵을 디큐하는 메서드
+    /// </summary>
     public void DequeueMap()
     {
         Map mapToDestroy = mapSpawnQueue.Dequeue();
@@ -87,6 +99,10 @@ public class MapSpawner : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// 맵을 지나가면 이전 맵을 파괴하는 메서드
+    /// </summary>
     public void DestroyMap()
     {
         if (!onBoss)

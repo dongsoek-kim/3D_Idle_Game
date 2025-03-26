@@ -49,6 +49,11 @@ public class CoinPool : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 몬스터 죽으면 사용
+    /// 몬스터 위치에서 코인 등장
+    /// </summary>
+    /// <param name="spawnPoint"></param>
     public void OnMonsterDeath(Transform spawnPoint)
     {
         for (int i = 0; i < coinPool.Count; i++)  

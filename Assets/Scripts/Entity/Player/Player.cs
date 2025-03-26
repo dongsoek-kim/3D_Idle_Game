@@ -34,10 +34,6 @@ public class Player: MonoBehaviour
         {
             attackPower = GameManager.Instance.CurplayerAttck;
             maxhealth = GameManager.Instance.CurplayerHealth;
-            Debug.Log("히히초기화");
-
-            Debug.Log("Health" + AlphabetNumberFormatter.FormatNumber(maxhealth));
-            Debug.Log("attackPower" + AlphabetNumberFormatter.FormatNumber(attackPower));
         }
         currentHealth = maxhealth;
         FindWorldCanvas();
@@ -76,7 +72,10 @@ public class Player: MonoBehaviour
         float healthPercentage = (float)currentHealth / (float)maxhealth;
         healthBarImage.fillAmount = healthPercentage;
     }
-
+    /// <summary>
+    /// 맵이동 이후에 타겟을 정하는 메서드
+    /// </summary>
+    /// <param name="monster"></param>
     public void GetTarget(MonsterBase? monster)
     {
         target = monster;
@@ -132,13 +131,16 @@ public class Player: MonoBehaviour
         if (currentHealth > maxhealth) currentHealth = maxhealth;
     }
 
+    /// <summary>
+    /// 초기화 함수 
+    /// 스테이지클리어나 재시작시(씬이동) 호출
+    /// </summary>
+    /// <param name="_attakcPower"></param>
+    /// <param name="_health"></param>
     public void Init(BigInteger _attakcPower,BigInteger _health)
     {
         attackPower = _attakcPower;
         maxhealth = _health;
         currentHealth = maxhealth;
-        Debug.Log("스텟 이어짐");
-        Debug.Log("Health" + AlphabetNumberFormatter.FormatNumber(maxhealth));
-        Debug.Log("attackPower" + AlphabetNumberFormatter.FormatNumber(attackPower));
     }
 }
