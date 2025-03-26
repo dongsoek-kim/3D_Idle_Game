@@ -16,10 +16,22 @@ public class InGameUI : BaseUI
     public Button BossButton;
     private int currentHits = 0;
     private int maxHits = 5;
+    public Button attackButton;   
+    public Button healthButton;  
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
         currentHits = 0;
+
+        if (attackButton != null)
+        {
+            attackButton.onClick.AddListener(GameManager.Instance.OnAttackPowerPlus);
+        }
+
+        if (healthButton != null)
+        {
+            healthButton.onClick.AddListener(GameManager.Instance.OnHealthPlus);
+        }
     }
 
     public void Start()

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class DungeonController : MonoBehaviour
@@ -68,13 +69,16 @@ public class DungeonController : MonoBehaviour
     {
         try
         {
-            Debug.Log("Monster Die");
             party.GetTarget(null);
             coinpool.OnMonsterDeath(monster.transform);
             GetDrop();
-            GameManager.Instance.ingameUI.FillBossGauge();
-            Debug.Log(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint.position);
-            party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
+            GameManager.Instance.uIManager.inGameUI.FillBossGauge();
+            if (mapManager.mapSpawner.mapSpawnQueue.Count != 0)
+            {
+                party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
+            }
+            else 
+            { Debug.Log("StageClear"); }
         }
         catch (Exception ex)
         {

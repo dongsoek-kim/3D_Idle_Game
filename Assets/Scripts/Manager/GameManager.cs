@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Numerics;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Dungeonscene")]
     public DungeonController dungeonController;
-    public InGameUI ingameUI;
+    public UIManager uIManager;
 
     public int Stage { get; set; }
 
@@ -75,20 +76,31 @@ public class GameManager : MonoBehaviour
         HealthUpgradePrice= 10;
 
     }
+    public void Init()
+    {
+        Debug.Log("게임 재시작");
+        Time.timeScale = 1f;
+        uIManager.Init();
+    }
+    public void PartyDefeat()
+    {   
+        foreach(Player member in party.partyMembers)
+        {
+            if(member!=null && !member.IsDead)
+            {
+                break;
+            }
+        }
+        StartCoroutine(StopGameAfterDelay(2f));
+    }
     public BigInteger Coin
     {
         get => coin;
         set
         {
             coin = value;
-            if (ingameUI == null)
-            {
-                Debug.LogError("ingameUI가 null입니다.");
-            }
-            else
-            {
-                ingameUI.UPdateCoin(coin);
-            }
+
+            uIManager.inGameUI.UPdateCoin(coin);
         }
     }
     public void UsedCoin(BigInteger bigInteger)
@@ -106,7 +118,7 @@ public class GameManager : MonoBehaviour
             prevAttck = currAttck;
             currAttck = next;
             attckUpgradePrice = currAttck * (BigInteger)attckUpgradePriceBase * attckPowerStack;
-            ingameUI.UpGradeAttak(currAttck, attckUpgradePrice);
+            uIManager.inGameUI.UpGradeAttak(currAttck, attckUpgradePrice);
             foreach (Player mamber in DungeonController.Instance.party.partyMembers)
             {
                 if (mamber != null)
@@ -117,7 +129,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{attckUpgradePrice}필요");
             Debug.Log(AlphabetNumberFormatter.FormatNumber(Coin));
         }
     }
@@ -131,7 +142,7 @@ public class GameManager : MonoBehaviour
             prevHealth = currHealth;
             currHealth = next;
             HealthUpgradePrice = currHealth * (BigInteger)HealthUpgradePriceBase * HealthStack;
-            ingameUI.UpGradeHealth(currHealth, HealthUpgradePrice);
+            uIManager.inGameUI.UpGradeHealth(currHealth, HealthUpgradePrice);
             foreach (Player mamber in DungeonController.Instance.party.partyMembers)
             {
                 if (mamber != null)
@@ -142,7 +153,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{HealthUpgradePrice}필요");
             Debug.Log(AlphabetNumberFormatter.FormatNumber(Coin));
         }
     }
@@ -154,15 +164,23 @@ public class GameManager : MonoBehaviour
             {
                 dungeonController = FindObjectOfType<DungeonController>();
             }
-            if (ingameUI == null)
+            if (uIManager == null)
             {
-                ingameUI = FindObjectOfType<InGameUI>();
+                uIManager = FindObjectOfType<UIManager>();
             }
             if(party ==null)
             {
                 party = FindObjectOfType<Party>();
             }
         }
+        Init();
+    }
+    private IEnumerator StopGameAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        uIManager.ChangeState(UIState.GameEnd);
+        Time.timeScale = 0f;
     }
 }
+
 

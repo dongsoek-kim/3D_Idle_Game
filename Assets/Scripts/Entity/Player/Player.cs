@@ -24,6 +24,9 @@ public class Player: MonoBehaviour
 
     private BigInteger attackPower;
     private BigInteger Maxhealth;
+
+    private bool isDead;
+    public bool IsDead { get { return isDead; } }
     public void Start()
     {
         if(attackPower==0 &&Maxhealth ==0)
@@ -46,7 +49,7 @@ public class Player: MonoBehaviour
     private void Update()
     {
         UpdateHealthBar();
-        if (target != null)
+        if (target != null&&!isDead)
         {
             if (atttackdelay > Time.deltaTime)
             {
@@ -72,7 +75,6 @@ public class Player: MonoBehaviour
     public void GetTarget(MonsterBase? monster)
     {
         target = monster;
-        Debug.Log($"{characterData.name}target:{target?.monsterData.monsterName}");
     }
     public  void Attack()
     {
@@ -86,12 +88,16 @@ public class Player: MonoBehaviour
         
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             Die();
         }
     }
     public void Die()
     {
-        Debug.Log("Player Die");
+        Debug.Log("À¸¾Ó");
+        animator.SetTrigger("isDead");
+        isDead = true;
+        GameManager.Instance.PartyDefeat();
     }
 
     public void FindWorldCanvas()
@@ -121,4 +127,5 @@ public class Player: MonoBehaviour
         if (currentHealth > Maxhealth) currentHealth = Maxhealth;
         Debug.Log("Health" + AlphabetNumberFormatter.FormatNumber(Maxhealth));
     }
+    
 }

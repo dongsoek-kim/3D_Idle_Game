@@ -16,12 +16,14 @@ public class UIManager : MonoBehaviour
 {
 
     [Header("UI")]
-    [SerializeField] InGameUI inGameUI;
-    [SerializeField] GameEndUI gameEndUI;
-    [SerializeField] PauseUI pauseUI;
+    [SerializeField] public InGameUI inGameUI;
+    [SerializeField] public GameEndUI gameEndUI;
+    [SerializeField] public PauseUI pauseUI;
 
 
     private UIState currentState;
+
+
     protected void Awake()
     {
         inGameUI = GetComponentInChildren<InGameUI>(true);
@@ -32,7 +34,16 @@ public class UIManager : MonoBehaviour
         pauseUI.Init(this);
         ChangeState(UIState.InGame);
     }
-
+    public void Init()
+    {
+        inGameUI = GetComponentInChildren<InGameUI>(true);
+        inGameUI.Init(this);
+        gameEndUI = GetComponentInChildren<GameEndUI>(true);
+        gameEndUI.Init(this);
+        pauseUI = GetComponentInChildren<PauseUI>(true);
+        pauseUI.Init(this);
+        ChangeState(UIState.InGame);
+    }
     public void ChangeState(UIState state)
     {
         currentState = state;

@@ -57,6 +57,7 @@ public class MonsterBase: MonoBehaviour
     {
         animator.SetTrigger("isAttack");
         target.Hit((BigInteger)monsterData.damage);
+        if (target.IsDead) target = null;
     }
 
     public  void Hit(BigInteger attackPower)
@@ -109,7 +110,6 @@ public class MonsterBase: MonoBehaviour
             }
         }
         target = partyMembers[highestAggro];
-        Debug.Log($"{monsterData.monsterName} target: {target.characterData.name}");
     }
 
     public void FindWorldCanvas()
