@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Numerics;
 
-public class MonsterBase : MonoBehaviour
+public class MonsterBase: MonoBehaviour
 {
     public GameObject healthBarPrefab;     
     private GameObject healthBarInstance;
@@ -19,7 +19,6 @@ public class MonsterBase : MonoBehaviour
     public Canvas worldCanvas;
     public float atttackdelay;
     public Animator animator;
-
     public Action onDeath;
     public void Start()
     { 
@@ -30,7 +29,6 @@ public class MonsterBase : MonoBehaviour
         healthBarImage = images.FirstOrDefault(img => img.gameObject != healthBarInstance);
         healthBarInstance.transform.SetParent(worldCanvas.transform);
         healthText = healthBarInstance.GetComponentInChildren<TextMeshProUGUI>();
-
         atttackdelay = monsterData.attackSpeed;
     }
     public void Update()
@@ -92,6 +90,7 @@ public class MonsterBase : MonoBehaviour
 
     void UpdateHealthBar()
     {
+
         healthBarInstance.transform.position = transform.position + UnityEngine.Vector3.up * 4f;
         healthBarInstance.transform.rotation = transform.rotation;
         healthText.text = $"{currentHealth}/{monsterData.maxHealth}";

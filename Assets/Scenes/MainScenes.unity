@@ -20424,6 +20424,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65312ea40bf479c4b878d936ac24fdeb, type: 3}
+--- !u!1 &1986773525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1986773526}
+  - component: {fileID: 1986773527}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1986773526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986773525}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.0002022, y: 3.9931986, z: 14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1986773527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986773525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478840ec9df2e864e97a92bc77267577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage: 0
+  party: {fileID: 0}
+  attckPowerStack: 0
+  HealthStack: 0
+  attckUpgradePriceBase: 0
+  HealthUpgradePriceBase: 0
+  dungeonController: {fileID: 0}
+  ingameUI: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!1001 &1992633453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26739,3 +26792,4 @@ SceneRoots:
   - {fileID: 1549568189}
   - {fileID: 97881802}
   - {fileID: 19172200}
+  - {fileID: 1986773526}

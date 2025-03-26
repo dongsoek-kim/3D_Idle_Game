@@ -5,7 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("InGame")]
+    public int stage;
+
     [Header("player")]
+    public Party party;
     public int attckPowerStack;
     public int HealthStack;
     public int attckUpgradePriceBase;
@@ -83,7 +87,6 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("µ·›§µð");
                 ingameUI.UPdateCoin(coin);
             }
         }
@@ -154,6 +157,10 @@ public class GameManager : MonoBehaviour
             if (ingameUI == null)
             {
                 ingameUI = FindObjectOfType<InGameUI>();
+            }
+            if(party ==null)
+            {
+                party = FindObjectOfType<Party>();
             }
         }
     }

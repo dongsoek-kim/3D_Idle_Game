@@ -12,6 +12,8 @@ public class DungeonController : MonoBehaviour
     public CoinPool coinpool;
     private static DungeonController instance;
     public int Stage;
+
+    public bool OnbossStage;
     public static DungeonController Instance
     {
         get
@@ -70,9 +72,9 @@ public class DungeonController : MonoBehaviour
             party.GetTarget(null);
             coinpool.OnMonsterDeath(monster.transform);
             GetDrop();
+            GameManager.Instance.ingameUI.FillBossGauge();
             Debug.Log(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint.position);
             party.MoveParty(mapManager.mapSpawner.mapSpawnQueue.Peek().partyPoint);
-            GameManager.Instance.ingameUI.FillBossGauge();
         }
         catch (Exception ex)
         {

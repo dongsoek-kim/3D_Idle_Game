@@ -34,11 +34,19 @@ public class MonsterManager : MonoBehaviour
         }
     }
     public List<MonsterBase> monsters;
+    public List<MonsterBase> Bossmonsters;
+
 
     public MonsterBase SpawnMonster(Transform monsterSpawn)
     {
         int randomIndex = Random.Range(0, monsters.Count);
         MonsterBase newMonster = Instantiate(monsters[randomIndex], monsterSpawn.position, monsterSpawn.rotation);
+        return newMonster;
+    }
+    public MonsterBase SpawnBossMonster(Transform monsterSpawn)
+    {
+        int StageIndex = GameManager.Instance.stage;
+        MonsterBase newMonster = Instantiate(Bossmonsters[StageIndex], monsterSpawn.position, monsterSpawn.rotation);
         return newMonster;
     }
 }

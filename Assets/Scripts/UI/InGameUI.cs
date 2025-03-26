@@ -4,7 +4,6 @@ using System.Numerics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class InGameUI : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class InGameUI : MonoBehaviour
     public TextMeshProUGUI healthValue;
     public TextMeshProUGUI coin;
     public Image BossGauge;
+    public Button BossButton;
     private int currentHits = 0;
     private int maxHits = 5;
 
@@ -43,6 +43,7 @@ public class InGameUI : MonoBehaviour
             currentHits++;
             BossGauge.fillAmount = (float)currentHits / maxHits;
         }
+        BossButton.gameObject.SetActive(true);
     }
 
     public void Init()

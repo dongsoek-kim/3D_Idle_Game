@@ -17,6 +17,9 @@ public class MapSpawner : MonoBehaviour
 
     private System.Random random=new System.Random();
 
+    public bool onBoss;
+    private bool bossSpawned;
+
     private void Start()
     {
         random = new System.Random();
@@ -30,7 +33,11 @@ public class MapSpawner : MonoBehaviour
 
     public void MapSpawn()
     {
-
+        if (onBoss)
+        {
+            SpawnBossMap();
+            return;
+        }
         Map map;
         if (preMap == null)
         {
@@ -53,28 +60,48 @@ public class MapSpawner : MonoBehaviour
             DequeueMap();
         }
     }
-
+    public void SpawnBossMap()
+    {
+        if (bossSpawned)
+        {
+            Map mapToDestroy = mapSpawnQueue.Dequeue();
+            destroyQueue.Enqueue(mapToDestroy);
+            mapToDestroy = destroyQueue.Dequeue();
+            Destroy(mapToDestroy.gameObject);
+            return;
+        }
+        spawnPoint.position = preMap.endPoint.position;
+        spawnPoint.rotation = preMap.endPoint.rotation;
+        Map newMap = Instantiate(bossMap, spawnPoint.position, spawnPoint.rotation);
+        preMap = newMap;
+        mapSpawnQueue.Enqueue(newMap);
+        bossSpawned = true;  
+    }
     public void DequeueMap()
     {
         Map mapToDestroy = mapSpawnQueue.Dequeue();
         destroyQueue.Enqueue(mapToDestroy);
-        if(mapSpawnQueue.Count<2)
+        if (mapSpawnQueue.Count < 2)
         {
-            MapSpawn();
+           MapSpawn();
         }
+
     }
     public void DestroyMap()
     {
-        Map mapToDestroy = destroyQueue.Dequeue();
-        Destroy(mapToDestroy.gameObject);
+        if (!onBoss)
+        {
+            Map mapToDestroy = destroyQueue.Dequeue();
+            Destroy(mapToDestroy.gameObject);
+        }
     }
-    //public IEnumerator DestroyAfterDelay(Map mapToDestroy,float delay)
-    //{
-    //    yield return new WaitForSeconds(delay);
-    //    Destroy(mapToDestroy.gameObject);
-    //}
     public int GetRandomNumber()
     {
         return random.Next(0, 4);
+    }
+
+    public void OnbossButton()
+    {
+        onBoss = true;
     }
 }

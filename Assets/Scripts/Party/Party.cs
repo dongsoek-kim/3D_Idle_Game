@@ -61,15 +61,6 @@ public class Party : MonoBehaviour
             isMoving = true;
             agent.isStopped = false;
             agent.SetDestination(nextPartyPoint.position);
-            if (!agent.isOnNavMesh)
-            {
-                Debug.LogError("Agent is not on the NavMesh.");
-            }
-
-            if (agent.isStopped)
-            {
-                Debug.Log("Agent is stopped.");
-            }
             foreach (Player member in partyMembers)
             {
                 if (member != null)
