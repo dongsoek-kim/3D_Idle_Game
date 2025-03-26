@@ -98,7 +98,7 @@ public class MonsterBase: MonoBehaviour
         healthBarInstance.transform.position = transform.position + UnityEngine.Vector3.up * 4f;
         healthBarInstance.transform.rotation = transform.rotation;
         healthText.text = $"{AlphabetNumberFormatter.FormatNumber(currentHealth)}/{AlphabetNumberFormatter.FormatNumber(maxHealth)}";
-        float healthPercentage = (float)currentHealth / maxHealth;
+        float healthPercentage = (float)currentHealth / (float)maxHealth;
         healthBarImage.fillAmount = healthPercentage;
     }
 

@@ -62,7 +62,10 @@ public class InGameUI : BaseUI
             currentHits++;
             BossGauge.fillAmount = (float)currentHits / maxHits;
         }
-        BossButton.gameObject.SetActive(true);
+        else
+        {
+            BossButton.gameObject.SetActive(true);
+        }
     }
 
     protected override UIState GetUIState()
