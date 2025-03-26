@@ -22,7 +22,14 @@ Unity
 
 #외부 리소스
 ------
-
+Procedural Coins
+Dog Knight PBR Polyart
+Level 1 Monster Pack
+Buttons Set
+Low Poly Medieval Blacksmith Props
+Simple Low Poly Nature Pack
+Lite Dungeon Pack 
+GameDev Polygon Kit 
 
 #키입력
 ----
@@ -44,3 +51,8 @@ Unity
 ----
 일반몬스터를 잡으면 게이지가 증가해 보스도전을 할수있고 보스를 잡으면 스테이지를 넘어간다.
 스테이지가 넘어갈때마다 몬스터가 강력해진다. 
+
+Issue
+----------
+숫자가 일정이상 커지면 망가집니다.
+double이나 더 큰 숫자로 감싸줘야되는데 flaot를 써서 생긴 이슈같습니다.
